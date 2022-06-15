@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100px;
+            height: 200px;
+            display: flexbox;
+            align-content: space-around;
+            flex-direction: column-reverse;
+        }
+        /* .h1 {} */
+    </style>
+</head>
+
+<body>
+    <div class="contianer1">
+        <h1 class="h1">My To Do List</h1>
+        <form action="/addTodoItem/" method="post">{% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" value="Add Todo Item">
+        </form>
+        <ul>
+            {% for i in all_items %}
+            <li>{{i.content}}
+                <form action="/deleteTodoItem/{{i.id}}/" method="post">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer>
+        made with &hearts;
+    </footer>
+</body>
+
+</html>
